@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Discover people, plans, and places in your city."
+    />
+    <title>CityScape</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#"
+        ><span class="brand-mark">C</span><span>CityScape</span></a
+      >
+      <p class="city-pill"><span>●</span> Austin, TX</p>
+      <button
+        class="avatar-button"
+        type="button"
+        data-open-stuff
+        aria-label="Open My Stuff"
+      >
+        KC
+      </button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Your city, less awkward</p>
+        <h1>Find something to do.<br /><em>Find someone to do it with.</em></h1>
+        <p class="hero-copy">
+          People, plans, and places picked for your interests—not for endless
+          scrolling.
+        </p>
+      </section>
+
+      <section class="discovery" aria-labelledby="discovery-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Discover nearby</p>
+            <h2 id="discovery-title">What are you looking for?</h2>
+          </div>
+          <button
+            class="filter-button"
+            type="button"
+            id="filter-button"
+            aria-pressed="false"
+          >
+            ✦ For you
+          </button>
+        </div>
+
+        <nav class="mode-tabs" aria-label="Discovery modes">
+          <button
+            class="mode-tab active"
+            type="button"
+            data-mode="people"
+            aria-pressed="true"
+          >
+            <span>☺</span> People
+          </button>
+          <button
+            class="mode-tab"
+            type="button"
+            data-mode="plans"
+            aria-pressed="false"
+          >
+            <span>✦</span> Plans
+          </button>
+          <button
+            class="mode-tab"
+            type="button"
+            data-mode="places"
+            aria-pressed="false"
+          >
+            <span>⌖</span> Places
+          </button>
+        </nav>
+
+        <div class="discovery-layout">
+          <aside class="side-note left-note">
+            <span class="note-number">01</span>
+            <p>Chosen around your interests, distance, and availability.</p>
+          </aside>
+          <div class="card-stage" aria-live="polite">
+            <div class="card-stack" aria-hidden="true"></div>
+            <article class="discovery-card" id="discovery-card">
+              <div class="card-photo-wrap">
+                <img id="card-image" src="" alt="" />
+                <div class="match-badge">
+                  <span>♥</span> <b id="match-value">92%</b> match
+                </div>
+                <div class="photo-count">1 / 3</div>
+              </div>
+              <div class="card-content">
+                <div class="card-title-row">
+                  <div>
+                    <p class="card-kicker" id="card-kicker">People</p>
+                    <h3 id="card-title">Maya, 24</h3>
+                  </div>
+                  <span class="distance" id="card-distance">2 mi</span>
+                </div>
+                <p class="card-description" id="card-description"></p>
+                <div class="tag-list" id="tag-list"></div>
+                <div class="mutual-row">
+                  <div class="mini-avatars">
+                    <span>J</span><span>A</span><span>M</span>
+                  </div>
+                  <p id="mutual-text"></p>
+                </div>
+              </div>
+            </article>
+            <div class="card-actions">
+              <button
+                class="action-button pass"
+                type="button"
+                id="pass-button"
+                aria-label="Pass"
+              >
+                ×
+              </button>
+              <button
+                class="action-button details"
+                type="button"
+                id="details-button"
+                aria-label="Details"
+              >
+                •••
+              </button>
+              <button
+                class="action-button save"
+                type="button"
+                id="save-button"
+                aria-label="Save"
+              >
+                ♥
+              </button>
+            </div>
+            <p class="action-hint">Pass <span>or</span> save for later</p>
+          </div>
+          <aside class="side-note right-note">
+            <span class="note-number">02</span>
+            <p id="mode-note"></p>
+          </aside>
+        </div>
+      </section>
+
+      <section class="week-section" id="my-stuff">
+        <div class="week-intro">
+          <p class="eyebrow">My stuff</p>
+          <h2>Your week, coming together.</h2>
+          <p>
+            Saved plans become a real week. No group-chat archaeology required.
+          </p>
+          <div class="saved-count">
+            <strong id="saved-count">2</strong
+            ><span>things saved<br />this week</span>
+          </div>
+        </div>
+        <div class="week-board">
+          <div class="week-days">
+            <span>MON</span><span>TUE</span><span class="today">WED</span
+            ><span>THU</span><span>FRI</span><span>SAT</span><span>SUN</span>
+          </div>
+          <div class="schedule-list" id="schedule-list">
+            <article class="schedule-card pink">
+              <div class="date-block"><strong>30</strong><span>AUG</span></div>
+              <div>
+                <p class="schedule-type">PLAN · 7:30 PM</p>
+                <h3>Indie Night at Mohawk</h3>
+                <p>With Jules, Ana + 2 more</p>
+              </div>
+              <button type="button">•••</button>
+            </article>
+            <article class="schedule-card yellow">
+              <div class="date-block"><strong>02</strong><span>SEP</span></div>
+              <div>
+                <p class="schedule-type">PLACE · 10:00 AM</p>
+                <h3>Paperboy brunch</h3>
+                <p>Saved to your bucket list</p>
+              </div>
+              <button type="button">•••</button>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand footer-brand" href="#"
+        ><span class="brand-mark">C</span><span>CityScape</span></a
+      >
+      <p>Go somewhere. Meet somebody. Make it a story.</p>
+      <nav>
+        <a href="#my-stuff">Connections</a><a href="#my-stuff">Calendar</a
+        ><a href="#my-stuff">Bucket list</a>
+      </nav>
+    </footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
