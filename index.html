@@ -22,24 +22,37 @@
       <a class="brand" href="#"
         ><span class="brand-mark">C</span><span>CityScape</span></a
       >
-      <p class="city-pill"><span>●</span> Austin, TX</p>
-      <button
-        class="avatar-button"
-        type="button"
-        data-open-stuff
-        aria-label="Open My Stuff"
-      >
-        KC
-      </button>
+      <p class="city-pill"><span>●</span> Gainesville, FL</p>
+      <div class="header-actions">
+        <button class="add-event-button" type="button" id="open-event-form">
+          <span aria-hidden="true">＋</span> Add event
+        </button>
+        <div class="profile-menu-wrap">
+          <button
+            class="avatar-button"
+            type="button"
+            id="profile-menu-button"
+            aria-label="Open profile menu"
+            aria-expanded="false"
+            aria-controls="profile-menu"
+          >KC</button>
+          <nav class="profile-menu" id="profile-menu" aria-label="Profile menu" hidden>
+            <a href="profile.html" target="_blank" rel="noopener">My profile</a>
+            <a href="feed.html" target="_blank" rel="noopener">My feed</a>
+            <a href="connections.html" target="_blank" rel="noopener">My connections</a>
+            <a href="calendar.html" target="_blank" rel="noopener">My calendar</a>
+            <a href="settings.html" target="_blank" rel="noopener">My settings</a>
+          </nav>
+        </div>
+      </div>
     </header>
 
     <main>
       <section class="hero">
-        <p class="eyebrow">Your city, less awkward</p>
+        <p class="eyebrow">Turn your city into your social life</p>
         <h1>Find something to do.<br /><em>Find someone to do it with.</em></h1>
         <p class="hero-copy">
-          People, plans, and places picked for your interests—not for endless
-          scrolling.
+          People, plans, and places curated for you; Designed to get you out of your house and into your life.
         </p>
       </section>
 
@@ -205,6 +218,23 @@
         ><a href="#my-stuff">Bucket list</a>
       </nav>
     </footer>
+    <dialog class="event-dialog" id="event-dialog">
+      <form class="event-form" id="event-form">
+        <div class="form-heading">
+          <div><p class="eyebrow">Share with the city</p><h2>Add an event</h2></div>
+          <button class="close-dialog" type="button" id="close-event-form" aria-label="Close event form">×</button>
+        </div>
+        <label>Event name<input type="text" name="eventName" placeholder="Movie night, run club..." required /></label>
+        <div class="form-row">
+          <label>Date<input type="date" name="eventDate" required /></label>
+          <label>Time<input type="time" name="eventTime" required /></label>
+        </div>
+        <label>Location<input type="text" name="eventLocation" placeholder="Where is it happening?" required /></label>
+        <label>Description<textarea name="eventDescription" rows="3" placeholder="Tell people what to expect"></textarea></label>
+        <button class="submit-event" type="submit">Add to CityScape</button>
+        <p class="form-note">This MVP stores the event only until you refresh the page.</p>
+      </form>
+    </dialog>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
   </body>
 </html>

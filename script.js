@@ -143,6 +143,12 @@ function showToast(message) {
   window.setTimeout(() => elements.toast.classList.remove("show"), 1800);
 }
 
+function escapeHTML(value) {
+  const element = document.createElement("span");
+  element.textContent = value;
+  return element.innerHTML;
+}
+
 document.querySelectorAll(".mode-tab").forEach((button) =>
   button.addEventListener("click", () => {
     currentMode = button.dataset.mode;
@@ -186,11 +192,63 @@ document.querySelector("#filter-button").addEventListener("click", (event) => {
       : "Showing all nearby picks",
   );
 });
-document
-  .querySelectorAll("[data-open-stuff]")
-  .forEach((button) =>
-    button.addEventListener("click", () =>
-      document.querySelector("#my-stuff").scrollIntoView(),
-    ),
-  );
+const profileButton = document.querySelector("#profile-menu-button");
+const profileMenu = document.querySelector("#profile-menu");
+const eventDialog = document.querySelector("#event-dialog");
+const eventForm = document.querySelector("#event-form");
+
+function closeProfileMenu() {
+  profileMenu.hidden = true;
+  profileButton.setAttribute("aria-expanded", "false");
+}
+
+profileButton.addEventListener("click", () => {
+  const willOpen = profileMenu.hidden;
+  profileMenu.hidden = !willOpen;
+  profileButton.setAttribute("aria-expanded", String(willOpen));
+});
+
+document.addEventListener("click", (event) => {
+  if (!event.target.closest(".profile-menu-wrap")) closeProfileMenu();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeProfileMenu();
+});
+
+document.querySelector("#open-event-form").addEventListener("click", () => {
+  closeProfileMenu();
+  eventDialog.showModal();
+});
+
+document.querySelector("#close-event-form").addEventListener("click", () => {
+  eventDialog.close();
+});
+
+eventDialog.addEventListener("click", (event) => {
+  if (event.target === eventDialog) eventDialog.close();
+});
+
+eventForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const formData = new FormData(eventForm);
+  const name = formData.get("eventName");
+  const location = formData.get("eventLocation");
+  const date = new Date(`${formData.get("eventDate")}T00:00:00`);
+  const time = formData.get("eventTime");
+  const readableTime = new Date(`2000-01-01T${time}`).toLocaleTimeString([], {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+
+  const item = document.createElement("article");
+  item.className = "schedule-card yellow saved-new";
+  item.innerHTML = `<div class="date-block"><strong>${date.getDate()}</strong><span>${date.toLocaleString("en", { month: "short" }).toUpperCase()}</span></div><div><p class="schedule-type">YOUR EVENT · ${readableTime}</p><h3>${escapeHTML(name)}</h3><p>${escapeHTML(location)}</p></div><button type="button" aria-label="More options">•••</button>`;
+  elements.schedule.prepend(item);
+  savedCount += 1;
+  elements.count.textContent = savedCount;
+  eventDialog.close();
+  eventForm.reset();
+  showToast(`${name} was added to CityScape`);
+});
 renderCard();
